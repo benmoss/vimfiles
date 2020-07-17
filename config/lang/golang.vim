@@ -2,12 +2,13 @@
 let g:go_fmt_autosave = 0
 let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1
+let g:go_list_type = "quickfix"
 
 " this breaks folding on vim < 8.0 or neovim
 if v:version >= 800 || has('nvim')
   let g:go_fmt_experimental = 1
 endif
-
+"
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
@@ -30,11 +31,14 @@ let s:go_tags_lock_path = resolve(expand('<sfile>:h') . '/../../tmp/gotagslock')
 
 let g:go_auto_type_info = 0
 let g:ale_go_golangci_lint_package = 1
-let g:ale_go_golangci_lint_options = '--enable-all
-\ --tests
-\ --fast
-\ --disable gochecknoglobals
-\ --disable gochecknoinits'
+" let g:ale_go_golangci_lint_options = '--enable-all
+" \ --tests
+" \ --fast
+" \ --no-config
+" \ --disable lll
+" \ --disable wsl
+" \ --disable godot
+" \ --disable gochecknoinits'
 
 function! golang#project_tags_path()
   return s:go_tags_path . '/' . substitute(expand('%:p'), '/', '--', 'g') . '--tags'
@@ -90,3 +94,14 @@ augroup luan_go_gotags
   autocmd BufWritePost *.go call golang#generate()
 augroup END
 
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_rename_command='gopls'
+let g:go_implements_mode='gopls'
+let g:go_referrers_mode='gopls'
+let g:go_fmt_command='gopls'
+let g:go_imports_mode='gopls'
+let g:go_gopls_use_placeholders='sure'
+" " call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+let g:go_test_show_name=1
+let g:go_test_timeout="20s"

@@ -10,8 +10,6 @@ let g:ale_sign_column_always = 1
 
 let g:ale_linters = {
 \   'go': ['go build', 'gofmt', 'golangci-lint'],
-\   'typescript': ['tsserver', 'typecheck'],
-\   'javascript': ['eslint'],
 \}
 
 " Enable completion where available.
